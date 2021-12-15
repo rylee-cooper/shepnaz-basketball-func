@@ -1,18 +1,13 @@
-﻿import React, { Component } from 'react';
+﻿import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import PlayerIndex from './PlayerIndex';
 
-class PlayerPage extends Component {
-
-    render() {
-        const { match } = this.props;
-
-        return (
-            <Switch>
-                <Route path={`${match.url}`} exact component={PlayerIndex} />
-            </Switch>
-        );
-    }
+const PlayerPage = (props) => {
+    const { match } = props;
+    return (
+        <Switch>
+            <Route path={`${match.url}`} exact component={PlayerIndex} />
+        </Switch>);
 }
 
 export default PlayerPage;
