@@ -1,0 +1,32 @@
+﻿.create-btn {
+    background-color: #51768e !important;
+    border-color: #3c5c6c !important;
+}
+    .create-btn:hover {
+        background-color: #3c5c6c !important;
+    }
+/***************** nav styling ***************/
+.navbar-nav .nav-link {
+    font-size: 22px;
+}
+
+.nav-link.active {
+    border-bottom: 1px solid white;
+}
+
+.shepnaz-nav-logo {
+    width: 70%;
+}
+/*********************************************/
+
+/***************** table styling ***************/
+th {
+    background-color: #eb8a54 !important;
+}
+/*********************************************/
+
+/**************** card styling ***************/
+.basic-card {
+    box-shadow: 0 5px 10px -5px #8c8e97;
+}
+/*********************************************/

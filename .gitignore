@@ -1,0 +1,13 @@
+﻿.vs
+GameStats.API/bin
+GameStats.API/obj
+GameStats.Common/bin
+GameStats.Common/obj
+GameStats.Data/bin
+GameStats.Data/obj
+GameStats.React/bin
+GameStats.React/obj
+GameStats.Services/bin
+GameStats.Services/obj
+GameStats.Tests/bin
+GameStats.Tests/obj
