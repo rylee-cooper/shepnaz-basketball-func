@@ -1,4 +1,4 @@
-﻿import React, { Component } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import api from '../shared/api';
 import { message } from '../shared/Message';
@@ -8,71 +8,65 @@ import TeamIndexActions from './TeamIndexActions';
 import TeamForm from './TeamForm';
 import TeamDto from '../../DTOs/Team/TeamDto';
 
-class TeamIndex extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            teams: [],
-            showModal: false,
-            selectedTeam: null
-        };
+const TeamIndex = (props) => {
+    const columns = [
+        { field: teamTableColumns.TEAM_NAME, header: 'Team' },
+        { field: teamTableColumns.LEAGUE_DESCRIPTION, header: 'League' },
+        { field: teamTableColumns.SEASON_DESCRIPTION, header: 'Season' }
+    ];
+    const { history } = props;
+    const [teams, setTeams] = useState(false);
+    const [showModal, setShowModal] = useState(false);
 
-        this.columns = [
-            { field: teamTableColumns.TEAM_NAME, header: 'Team' },
-            { field: teamTableColumns.LEAGUE_DESCRIPTION, header: 'League' },
-            { field: teamTableColumns.SEASON_DESCRIPTION, header: 'Season' }
-        ];
-    }
-
-    async componentDidMount() {
-        this.getTeams();
-    }
-
-    getTeams = () => {
+    const getTeams = () => {
         api.getTeams().then((result) => {
-            this.setState({ teams: result.teams });
+            setTeams(result.teams);
         }).catch(err => {
             message.error(`Error getting teams: ${err.message}`);
         });
     }
 
-    showModal = () => {
-        this.setState({ showModal: true });
+    const displayModal = () => {
+        setShowModal(true);
     }
 
-    hideModal = () => {
-        this.setState({ showModal: false });
+    const hideModal = () => {
+        setShowModal(false);
     }
-    
-    addTeam = (dto, setErrors, setSubmitting) => {
+
+    const addTeam = (dto, setErrors, setSubmitting) => {
         api.addTeam(dto).then(() => {
-            this.getTeams();
-            this.hideModal();
+            getTeams();
+            hideModal();
         }).catch(err => {
             setErrors({ form: err.message });
             setSubmitting(false);
         });
     }
 
-    handleSelection = (selection) => {
-        this.props.history.push(`/Team/${selection.id}`);
+    const handleSelection = (selection) => {
+        history.push(`/Team/${selection.id}`);
     }
 
-    render() {
-        const { teams, showModal } = this.state;
-        return (
-            <React.Fragment>
-                <TeamIndexActions handleAddTeamClick={this.showModal} />
-                <TableData data={teams} columns={this.columns} handleSelection={this.handleSelection} />
-                {showModal && <TeamForm
-                    showModal={showModal}
-                    handleCancelClick={this.hideModal}
-                    defaultTeam={new TeamDto()}
-                    handleFormSubmit={this.addTeam}
-                    actionName="Add" />}
-            </React.Fragment>
-        );
-    }
+    useEffect(() => {
+        getTeams();
+        return () => {
+            setTeams([]);
+        }
+    }, []);
+
+    return (
+        <React.Fragment>
+            <TeamIndexActions handleAddTeamClick={displayModal} />
+            <TableData data={teams} columns={columns} handleSelection={handleSelection} />
+            {showModal && <TeamForm
+                showModal={showModal}
+                handleCancelClick={hideModal}
+                defaultTeam={new TeamDto()}
+                handleFormSubmit={addTeam}
+                actionName="Add" />}
+        </React.Fragment>
+    );
 }
 
 export default withRouter(TeamIndex);
