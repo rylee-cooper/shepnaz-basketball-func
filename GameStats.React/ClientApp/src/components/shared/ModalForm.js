@@ -56,7 +56,7 @@ const ModalForm = (props) => {
                                 {errors.form}
                             </Form.Control.Feedback>
                             {formFields.map(field =>
-                                !field.isHidden && <Field key={field.name}
+                                <Field key={field.name}
                                     name={field.name}>
                                     {({ form }) =>
                                         <Form.Group className="mb-4" key={field.name}>

@@ -71,7 +71,7 @@ namespace GameStats.Data.Repositories
             {
                 await _context.SaveChangesAsync();
             }
-            catch (Exception e)
+            catch
             {
                 if (_context.Teams.Any(x => x.Id == team.Id))
                 {
