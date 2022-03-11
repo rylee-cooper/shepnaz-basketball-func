@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect, useCallback } from 'react';
 import { message } from '../shared/Message';
 import api from '../shared/api';
 import { inputTypes, playerFormFieldNames, playerFormDisplayNames } from '../../constants';
@@ -29,7 +29,7 @@ const PlayerForm = (props) => {
         });
     }
 
-    const getTeams = () => {
+    const getTeams = useCallback(() => {
         api.getTeams().then((result) => {
             const teamsUnderLeagueSeason =
                 result.teams.filter(x => x.leagueId === selectedLeagueId && x.seasonId === selectedSeasonId);
@@ -37,7 +37,7 @@ const PlayerForm = (props) => {
         }).catch(err => {
             message.error(`Error getting teams: ${err.message}`);
         });
-    }
+    }, [selectedLeagueId, selectedSeasonId]);
 
     const isValidForm = (values, setErrors) => {
         if (!values.name || !values.leagueId || !values.seasonId) {
@@ -64,13 +64,13 @@ const PlayerForm = (props) => {
 
     const handleSelection = (selectedValue, fieldName) => {
         switch (fieldName) {
-        case playerFormFieldNames.SEASON:
-            setSelectedSeasonId(selectedValue);
-            break;
-        case playerFormFieldNames.LEAGUE:
-            setSelectedLeagueId(selectedValue);
-            break;
-        default:
+            case playerFormFieldNames.SEASON:
+                setSelectedSeasonId(selectedValue);
+                break;
+            case playerFormFieldNames.LEAGUE:
+                setSelectedLeagueId(selectedValue);
+                break;
+            default:
             // code block
         }
     }
@@ -84,7 +84,7 @@ const PlayerForm = (props) => {
         } else {
             setTeams([]);
         }
-    }, [selectedSeasonId, selectedLeagueId]);
+    }, [selectedSeasonId, selectedLeagueId, getTeams]);
 
     const fields = [
         {
@@ -92,7 +92,7 @@ const PlayerForm = (props) => {
             name: playerFormFieldNames.FIRST_NAME,
             inputType: inputTypes.TEXT,
             options: [],
-            initialValue: defaultPlayer.id !== 0 ? defaultPlayer.firstName : '',
+            initialValue: defaultPlayer.id !== 0 ? defaultPlayer.firstName : ''
         },
         {
             displayName: playerFormDisplayNames.LAST_NAME,

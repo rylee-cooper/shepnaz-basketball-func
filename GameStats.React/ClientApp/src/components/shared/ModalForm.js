@@ -64,7 +64,7 @@ const ModalForm = (props) => {
                                                 ? <Form.Control
                                                     type="text"
                                                     name={field.name}
-                                                    value={values[field.name]}
+                                                    value={values[field.name] ?? ''}
                                                     placeholder={field.displayName}
                                                     onChange={handleChange}
                                                     isInvalid={touched[field.name] && !!errors[field.name]}
