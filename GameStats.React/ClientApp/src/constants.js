@@ -5,13 +5,13 @@
 };
 
 export const teamFormFieldNames = {
-    TEAM_NAME: 'name',
+    TEAM: 'name',
     LEAGUE: 'leagueId',
     SEASON: 'seasonId'
 };
 
 export const teamFormDisplayNames = {
-    TEAM_NAME: 'Team',
+    TEAM: 'Team',
     LEAGUE: 'League',
     SEASON: 'Season'
 };

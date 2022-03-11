@@ -10,31 +10,7 @@ const TeamForm = (props) => {
 
     const [leagues, setLeagues] = useState([]);
     const [seasons, setSeasons] = useState([]);
-
-    const fields = [
-        {
-            displayName: teamFormDisplayNames.TEAM_NAME,
-            name: teamFormFieldNames.TEAM_NAME,
-            inputType: inputTypes.TEXT,
-            options: [],
-            initialValue: defaultTeam.id !== 0 ? defaultTeam.name : ''
-        },
-        {
-            displayName: teamFormDisplayNames.LEAGUE,
-            name: teamFormFieldNames.LEAGUE,
-            inputType: inputTypes.SELECT,
-            options: leagues.map(x => ({ value: x.id, label: x.description })),
-            initialValue: defaultTeam.id !== 0 ? { value: defaultTeam.leagueId, label: defaultTeam.leagueDescription } : ''
-        },
-        {
-            displayName: teamFormDisplayNames.SEASON,
-            name: teamFormFieldNames.SEASON,
-            inputType: inputTypes.SELECT,
-            options: seasons.map(x => ({ value: x.id, label: x.description })),
-            initialValue: defaultTeam.id !== 0 ? { value: defaultTeam.seasonId, label: defaultTeam.seasonDescription } : ''
-        }
-    ];
-
+    
     const getLeagues = () => {
         api.getLeagues().then((result) => {
             setLeagues(result.leagues);
@@ -54,7 +30,7 @@ const TeamForm = (props) => {
     const isValidForm = (values, setErrors) => {
         if (!values.name || !values.leagueId || !values.seasonId) {
             setErrors({
-                [teamFormFieldNames.TEAM_NAME]: !values[teamFormFieldNames.TEAM_NAME] ? 'Team Name is required' : '',
+                [teamFormFieldNames.TEAM]: !values[teamFormFieldNames.TEAM] ? 'Team Name is required' : '',
                 [teamFormFieldNames.LEAGUE]: !values[teamFormFieldNames.LEAGUE] ? 'League is required' : '',
                 [teamFormFieldNames.SEASON]: !values[teamFormFieldNames.SEASON] ? 'Season is required' : ''
             });
@@ -75,6 +51,30 @@ const TeamForm = (props) => {
         getLeagues();
         getSeasons();
     }, []);
+
+    const fields = [
+        {
+            displayName: teamFormDisplayNames.TEAM,
+            name: teamFormFieldNames.TEAM,
+            inputType: inputTypes.TEXT,
+            options: [],
+            initialValue: defaultTeam.id !== 0 ? defaultTeam.name : ''
+        },
+        {
+            displayName: teamFormDisplayNames.SEASON,
+            name: teamFormFieldNames.SEASON,
+            inputType: inputTypes.SELECT,
+            options: seasons.map(x => ({ value: x.id, label: x.description })),
+            initialValue: defaultTeam.id !== 0 ? { value: defaultTeam.seasonId, label: defaultTeam.seasonDescription } : ''
+        },
+        {
+            displayName: teamFormDisplayNames.LEAGUE,
+            name: teamFormFieldNames.LEAGUE,
+            inputType: inputTypes.SELECT,
+            options: leagues.map(x => ({ value: x.id, label: x.description })),
+            initialValue: defaultTeam.id !== 0 ? { value: defaultTeam.leagueId, label: defaultTeam.leagueDescription } : ''
+        }
+    ];
 
     return (
         <ModalForm showModal={showModal}

@@ -10,10 +10,10 @@ const ModalForm = (props) => {
         initialValues,
         handleFormSubmit,
         handleCancelClick,
-        addFieldOnSelect,
         showModal,
         modalTitle,
-        formFields
+        formFields,
+        handleSelection
     } = props;
 
     const getCustomStyles = (isValid) => {
@@ -78,10 +78,11 @@ const ModalForm = (props) => {
                                                         defaultValue={field.initialValue}
                                                         closeMenuOnSelect={true}
                                                         isClearable={true}
+                                                        noOptionsMessage={() => field.noOptionsMessage ?? 'No options'}
                                                         onChange={(e) => {
                                                             form.setFieldValue(field.name, e ? e.value : 0, false);
-                                                            if (addFieldOnSelect !== undefined) {
-                                                                addFieldOnSelect(e.value, field.name);
+                                                            if (handleSelection !== undefined) {
+                                                                handleSelection(e ? e.value : 0, field.name);
                                                             };
                                                         }} />
                                                     : null}
