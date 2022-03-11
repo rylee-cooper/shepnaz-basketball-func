@@ -14,5 +14,6 @@ namespace GameStats.Data.Framework
         public DbSet<Coach> Coaches { get; set; }
         public DbSet<League> Leagues { get; set; }
         public DbSet<Season> Seasons { get; set; }
+        public DbSet<Gender> Genders { get; set; }
     }
 }
