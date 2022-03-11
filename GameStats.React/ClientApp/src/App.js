@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router';
-import { Layout } from './components/Layout';
+import Layout from './components/Layout';
 import Dashboard from './components/dashboard/Dashboard';
 import TeamPage from './components/teams/TeamPage';
 import PlayerPage from './components/players/PlayerPage';
