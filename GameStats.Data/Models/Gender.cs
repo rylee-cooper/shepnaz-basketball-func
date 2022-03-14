@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GameStats.Data.Models
@@ -11,5 +12,8 @@ namespace GameStats.Data.Models
 
         [Required]
         public string Description { get; set; }
+
+        public ICollection<Player> Players { get; set; }
+
     }
 }

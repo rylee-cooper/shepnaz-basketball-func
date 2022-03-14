@@ -22,13 +22,15 @@ namespace GameStats.Data.Models
 
         [Required]
         public DateTime DateOfBirth { get; set; }
-
-        [Required]
-        public string Gender { get; set; }
-
+        
         [Required]
         public int TeamId { get; set; }
 
         public Team Team { get; set; }
+
+        [Required]
+        public int GenderId { get; set; }
+
+        public Gender Gender { get; set; }
     }
 }

@@ -27,6 +27,9 @@ namespace GameStats.Common.Contracts.Player
         [JsonPropertyName("dateOfBirth")]
         public DateTime DateOfBirth { get; set; }
 
+        [JsonPropertyName("genderId")]
+        public int GenderId { get; set; }
+
         [JsonPropertyName("gender")]
         public string Gender { get; set; }
     }

@@ -15,7 +15,8 @@ namespace GameStats.Services.Mapping
                 TeamId = domain.TeamId,
                 TeamName = domain.Team?.Name ?? string.Empty,
                 DateOfBirth = domain.DateOfBirth,
-                Gender = domain.Gender
+                Gender = domain.Gender?.Description,
+                GenderId = domain.GenderId
             }
             : null;
 
@@ -27,7 +28,7 @@ namespace GameStats.Services.Mapping
             JerseyNumber = dto.JerseyNumber,
             TeamId = dto.TeamId,
             DateOfBirth = dto.DateOfBirth,
-            Gender = dto.Gender
+            GenderId = dto.GenderId
         };
     }
 }
