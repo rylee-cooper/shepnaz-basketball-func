@@ -1,4 +1,4 @@
-﻿import React from 'react';
+﻿import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import Select from 'react-select';
 import { Formik, Field } from 'formik';
@@ -15,6 +15,8 @@ const ModalForm = (props) => {
         formFields,
         handleSelection
     } = props;
+
+    const [inputType, setInputType] = useState('text');
 
     const getCustomStyles = (isValid) => {
         return {
@@ -55,6 +57,18 @@ const ModalForm = (props) => {
                             handleSelection(e ? e.value : 0, field.name);
                         };
                     }} />;
+            case inputTypes.DATE:
+                return <Form.Control
+                    type={inputType}
+                    onFocus={() => setInputType('date')}
+                    onBlur={() => setInputType('text')}
+                    format="MM/dd/yyyy"
+                    name={field.name}
+                    value={values[field.name] ?? ''}
+                    placeholder={field.displayName}
+                    onChange={handleChange}
+                    isInvalid={touched[field.name] && !!errors[field.name]}
+                />;
             default:
                 return null;
         }

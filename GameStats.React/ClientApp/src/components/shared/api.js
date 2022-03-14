@@ -137,8 +137,6 @@ export default {
     async getGenders() {
         const url = 'Gender';
         let response = await apiCall(url);
-        let test = response;
-        let test2 = test;
         return new GenderListDto(response);
     },
     //*****************************************
