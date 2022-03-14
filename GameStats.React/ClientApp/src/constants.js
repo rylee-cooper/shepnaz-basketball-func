@@ -28,7 +28,9 @@ export const playerFormFieldNames = {
     JERSEY_NUMBER: 'jerseyNumber',
     TEAM: 'teamId',
     SEASON: 'seasonId',
-    LEAGUE: 'leagueId'
+    LEAGUE: 'leagueId',
+    DOB: 'dateOfBirth',
+    GENDER: 'gender'
 };
 
 export const playerFormDisplayNames = {
@@ -37,10 +39,13 @@ export const playerFormDisplayNames = {
     JERSEY_NUMBER: 'Jersey Number',
     TEAM: 'Team',
     SEASON: 'Season',
-    LEAGUE: 'League'
+    LEAGUE: 'League',
+    DOB: 'Date of Birth',
+    GENDER: 'Gender'
 };
 
 export const inputTypes = {
     SELECT: 'select',
-    TEXT: 'text'
+    TEXT: 'text',
+    DATE: 'date'
 }

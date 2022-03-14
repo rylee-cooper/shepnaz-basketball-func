@@ -6,6 +6,7 @@ import PlayerListDto from '../../DTOs/Player/PlayerListDto';
 
 import LeagueListDto from '../../DTOs/League/LeagueListDto';
 import SeasonListDto from '../../DTOs/Season/SeasonListDto';
+import GenderListDto from '../../DTOs/Gender/GenderListDto';
 
 const apiUrl = process.env.REACT_APP_API_URL + 'api';
 
@@ -129,6 +130,16 @@ export default {
         const url = 'Season';
         let response = await apiCall(url);
         return new SeasonListDto(response);
+    },
+    //*****************************************
+
+    //********* Genders api calls **************
+    async getGenders() {
+        const url = 'Gender';
+        let response = await apiCall(url);
+        let test = response;
+        let test2 = test;
+        return new GenderListDto(response);
     },
     //*****************************************
 }

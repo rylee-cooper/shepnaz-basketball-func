@@ -28,6 +28,38 @@ const ModalForm = (props) => {
         }
     }
 
+    const getInputField = (field, form, values, handleChange, touched, errors) => {
+        switch (field.inputType) {
+            case inputTypes.TEXT:
+                return <Form.Control
+                    type="text"
+                    name={field.name}
+                    value={values[field.name] ?? ''}
+                    placeholder={field.displayName}
+                    onChange={handleChange}
+                    isInvalid={touched[field.name] && !!errors[field.name]}
+                />;
+            case inputTypes.SELECT:
+                return <Select
+                    name={field.name}
+                    options={field.options}
+                    placeholder={field.displayName}
+                    styles={getCustomStyles(!errors[field.name])}
+                    defaultValue={field.initialValue}
+                    closeMenuOnSelect={true}
+                    isClearable={true}
+                    noOptionsMessage={() => field.noOptionsMessage ?? 'No options'}
+                    onChange={(e) => {
+                        form.setFieldValue(field.name, e ? e.value : 0, false);
+                        if (handleSelection !== undefined) {
+                            handleSelection(e ? e.value : 0, field.name);
+                        };
+                    }} />;
+            default:
+                return null;
+        }
+    }
+
     return (
         <Modal show={showModal}
             onHide={handleCancelClick}
@@ -60,32 +92,7 @@ const ModalForm = (props) => {
                                     name={field.name}>
                                     {({ form }) =>
                                         <Form.Group className="mb-4" key={field.name}>
-                                            {field.inputType === inputTypes.TEXT
-                                                ? <Form.Control
-                                                    type="text"
-                                                    name={field.name}
-                                                    value={values[field.name] ?? ''}
-                                                    placeholder={field.displayName}
-                                                    onChange={handleChange}
-                                                    isInvalid={touched[field.name] && !!errors[field.name]}
-                                                />
-                                                : field.inputType === inputTypes.SELECT
-                                                    ? <Select
-                                                        name={field.name}
-                                                        options={field.options}
-                                                        placeholder={field.displayName}
-                                                        styles={getCustomStyles(!errors[field.name])}
-                                                        defaultValue={field.initialValue}
-                                                        closeMenuOnSelect={true}
-                                                        isClearable={true}
-                                                        noOptionsMessage={() => field.noOptionsMessage ?? 'No options'}
-                                                        onChange={(e) => {
-                                                            form.setFieldValue(field.name, e ? e.value : 0, false);
-                                                            if (handleSelection !== undefined) {
-                                                                handleSelection(e ? e.value : 0, field.name);
-                                                            };
-                                                        }} />
-                                                    : null}
+                                            {getInputField(field, form, values, handleChange, touched, errors)}
                                             <Form.Control.Feedback type="invalid" className="d-block">
                                                 {errors[field.name]}
                                             </Form.Control.Feedback>

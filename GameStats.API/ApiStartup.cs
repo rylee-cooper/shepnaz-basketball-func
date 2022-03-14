@@ -48,6 +48,7 @@ namespace GameStats.API
             services.AddScoped<ICoachService, CoachService>();
             services.AddScoped<IPlayerService, PlayerService>();
             services.AddScoped<ISeasonService, SeasonService>();
+            services.AddScoped<IGenderService, GenderService>();
 
             services.AddScoped<ApiExceptionFilter>();
         }

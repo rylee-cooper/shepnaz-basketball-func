@@ -15,7 +15,7 @@ namespace GameStats.API.Controllers
             _genderService = genderService;
         }
 
-        // GET: api/league
+        // GET: api/gender
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -24,7 +24,7 @@ namespace GameStats.API.Controllers
             return Ok(genders);
         }
 
-        // GET: api/league/5
+        // GET: api/gender/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {

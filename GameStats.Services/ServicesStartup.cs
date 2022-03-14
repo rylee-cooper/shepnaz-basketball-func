@@ -24,6 +24,7 @@ namespace GameStats.Services
             services.AddScoped<IPlayerRepository, PlayerRepository>();
             services.AddScoped<ICoachRepository, CoachRepository>();
             services.AddScoped<ISeasonRepository, SeasonRepository>();
+            services.AddScoped<IGenderRepository, GenderRepository>();
         }
     }
 }
