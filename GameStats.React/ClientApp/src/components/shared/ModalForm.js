@@ -1,9 +1,8 @@
-﻿import React, { useState } from 'react';
+﻿import React from 'react';
 import { Button, Form } from 'react-bootstrap';
-import Select from 'react-select';
 import { Formik, Field } from 'formik';
 import Modal from 'react-bootstrap/Modal';
-import { inputTypes } from '../../constants';
+import FormInput from './inputs/FormInput';
 
 const ModalForm = (props) => {
     const {
@@ -15,64 +14,6 @@ const ModalForm = (props) => {
         formFields,
         handleSelection
     } = props;
-
-    const [inputType, setInputType] = useState('text');
-
-    const getCustomStyles = (isValid) => {
-        return {
-            control: (styles, state) => ({
-                ...styles,
-                borderColor: isValid ? '#bbbcc6' : '#dc3545',
-                '&:hover': {
-                    borderColor: isValid ? '#bbbcc6' : '#dc3545'
-                }
-            })
-        }
-    }
-
-    const getInputField = (field, form, values, handleChange, touched, errors) => {
-        switch (field.inputType) {
-            case inputTypes.TEXT:
-                return <Form.Control
-                    type="text"
-                    name={field.name}
-                    value={values[field.name] ?? ''}
-                    placeholder={field.displayName}
-                    onChange={handleChange}
-                    isInvalid={touched[field.name] && !!errors[field.name]}
-                />;
-            case inputTypes.SELECT:
-                return <Select
-                    name={field.name}
-                    options={field.options}
-                    placeholder={field.displayName}
-                    styles={getCustomStyles(!errors[field.name])}
-                    defaultValue={field.initialValue}
-                    closeMenuOnSelect={true}
-                    isClearable={true}
-                    noOptionsMessage={() => field.noOptionsMessage ?? 'No options'}
-                    onChange={(e) => {
-                        form.setFieldValue(field.name, e ? e.value : 0, false);
-                        if (handleSelection !== undefined) {
-                            handleSelection(e ? e.value : 0, field.name);
-                        };
-                    }} />;
-            case inputTypes.DATE:
-                return <Form.Control
-                    type={inputType}
-                    onFocus={() => setInputType('date')}
-                    onBlur={() => setInputType('text')}
-                    format="MM/dd/yyyy"
-                    name={field.name}
-                    value={values[field.name] ?? ''}
-                    placeholder={field.displayName}
-                    onChange={handleChange}
-                    isInvalid={touched[field.name] && !!errors[field.name]}
-                />;
-            default:
-                return null;
-        }
-    }
 
     return (
         <Modal show={showModal}
@@ -106,7 +47,7 @@ const ModalForm = (props) => {
                                     name={field.name}>
                                     {({ form }) =>
                                         <Form.Group className="mb-4" key={field.name}>
-                                            {getInputField(field, form, values, handleChange, touched, errors)}
+                                            {<FormInput {...{ field, form, values, handleChange, touched, errors, handleSelection }} />}
                                             <Form.Control.Feedback type="invalid" className="d-block">
                                                 {errors[field.name]}
                                             </Form.Control.Feedback>
