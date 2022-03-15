@@ -67,7 +67,7 @@ const TeamDetail = (props) => {
     useEffect(() => {
         getTeam();
         getPlayers();
-        //getCoaches();
+        getCoaches();
     }, []);
 
     return (
@@ -80,7 +80,7 @@ const TeamDetail = (props) => {
                                 <Card.Title as="h2">{team.name}</Card.Title>
                                 <Card.Text>League: {team.leagueDescription}</Card.Text>
                                 <Card.Text>{team.seasonDescription}</Card.Text>
-                                <Card.Text>Coach: {getCoachDisplay(team.coaches)}</Card.Text>
+                                <Card.Text>Coach: {getCoachDisplay(coaches)}</Card.Text>
                             </Col>
                             <Col className="d-flex flex-row-reverse">
                                 <div>

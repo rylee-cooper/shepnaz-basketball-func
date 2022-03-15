@@ -13,6 +13,7 @@ namespace GameStats.Data.Repositories
         Task<IEnumerable<Coach>> GetAsync();
 
         Task<Coach> GetAsync(int id);
+        Task<IEnumerable<Coach>> GetByTeamId(int teamId);
 
         Task<Coach> AddAsync(Coach coach);
 
@@ -39,6 +40,12 @@ namespace GameStats.Data.Repositories
             return await Task.FromResult(_context.Coaches.AsNoTracking().FirstOrDefault(x => x.Id == id));
         }
 
+        public async Task<IEnumerable<Coach>> GetByTeamId(int teamId)
+        {
+            return await _context.Coaches
+                .Where(x => x.TeamId == teamId)
+                .ToListAsync();
+        }
         public async Task<Coach> AddAsync(Coach coach)
         {
             _context.Add(coach);

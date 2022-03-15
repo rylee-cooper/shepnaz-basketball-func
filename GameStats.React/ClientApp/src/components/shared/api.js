@@ -139,6 +139,14 @@ export default {
     },
     //*****************************************
 
+    //********* Coach api calls **************
+    async getCoachesByTeam(id) {
+        const url = `Coach/Team/${id}`;
+        let response = await apiCall(url);
+        return new PlayerListDto(response);
+    },
+    //*****************************************
+
     //********* Genders api calls **************
     async getGenders() {
         const url = 'Gender';

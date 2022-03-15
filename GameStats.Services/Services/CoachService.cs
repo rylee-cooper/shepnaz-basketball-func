@@ -12,6 +12,8 @@ namespace GameStats.Services.Services
 
         Task<CoachDto> GetAsync(int id);
 
+        Task<CoachListDto> GetByTeamId(int teamId);
+
         Task<CoachDto> AddAsync(CoachDto dto);
 
         Task<CoachDto> EditAsync(CoachDto dto);
@@ -41,6 +43,15 @@ namespace GameStats.Services.Services
             var coach = await _coachRepository.GetAsync(id);
 
             return CoachMapper.DomainToDto(coach);
+        }
+
+        public async Task<CoachListDto> GetByTeamId(int teamId)
+        {
+            var coaches = await _coachRepository.GetByTeamId(teamId);
+            return new CoachListDto()
+            {
+                Coaches = coaches.Select(CoachMapper.DomainToDto).ToList()
+            };
         }
 
         public async Task<CoachDto> AddAsync(CoachDto dto)

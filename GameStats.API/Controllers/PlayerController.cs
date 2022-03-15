@@ -42,7 +42,7 @@ namespace GameStats.API.Controllers
         {
             var players = await _playerService.GetByTeamAsync(teamId);
 
-            return players != null ? Ok(players) : NotFound();
+            return Ok(players);
         }
 
         // POST: api/player/add

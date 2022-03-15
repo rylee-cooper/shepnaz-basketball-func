@@ -34,6 +34,15 @@ namespace GameStats.API.Controllers
             return coach != null ? Ok(coach) : NotFound();
         }
 
+        // GET: api/coach/team/5
+        [HttpGet("Team/{teamId}")]
+        public async Task<IActionResult> GetByTeamId(int teamId)
+        {
+            var coaches = await _coachService.GetByTeamId(teamId);
+
+            return Ok(coaches);
+        }
+
         // POST: api/coach/add
         [HttpPost]
         public async Task<IActionResult> AddAsync(CoachDto dto)
