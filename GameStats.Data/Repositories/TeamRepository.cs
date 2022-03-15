@@ -47,8 +47,6 @@ namespace GameStats.Data.Repositories
             return await Task.FromResult(_context.Teams.AsNoTracking()
                 .Include(x => x.League)
                 .Include(x => x.Season)
-                .Include(x => x.Players)
-                .Include(x => x.Coaches)
                 .FirstOrDefault(x => x.Id == id));
         }
 

@@ -41,7 +41,7 @@ namespace GameStats.Services.Services
         {
             var team = await _teamRepository.GetAsync(id);
 
-            return TeamMapper.DomainToDtoWithRelationships(team);
+            return TeamMapper.DomainToDto(team);
         }
 
         public async Task<TeamDto> AddAsync(TeamDto dto)

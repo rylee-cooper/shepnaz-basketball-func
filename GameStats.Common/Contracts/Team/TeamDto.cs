@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using GameStats.Common.Contracts.Coach;
-using GameStats.Common.Contracts.Player;
 
 namespace GameStats.Common.Contracts.Team
 {
@@ -18,13 +16,7 @@ namespace GameStats.Common.Contracts.Team
 
         [JsonPropertyName("seasonId")]
         public int SeasonId { get; set; }
-
-        [JsonPropertyName("players")] 
-        public ICollection<PlayerDto> Players { get; set; } = new List<PlayerDto>();
-
-        [JsonPropertyName("coaches")]
-        public ICollection<CoachDto> Coaches { get; set; } = new List<CoachDto>();
-
+        
         [JsonPropertyName("leagueDescription")]
         public string LeagueDescription { get; set; }
 

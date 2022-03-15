@@ -25,19 +25,5 @@ namespace GameStats.Services.Mapping
             LeagueId = dto.LeagueId,
             SeasonId = dto.SeasonId
         };
-
-        public static TeamDto DomainToDtoWithRelationships(Team domain) => domain != null
-            ? new TeamDto
-            {
-                Id = domain.Id,
-                Name = domain.Name,
-                LeagueId = domain.LeagueId,
-                SeasonId = domain.SeasonId,
-                LeagueDescription = domain.League.Description,
-                SeasonDescription = domain.Season.Description,
-                Players = domain.Players.Select(PlayerMapper.DomainToDto).ToList(),
-                Coaches = domain.Coaches.Select(CoachMapper.DomainToDto).ToList()
-            }
-            : null;
     }
 }

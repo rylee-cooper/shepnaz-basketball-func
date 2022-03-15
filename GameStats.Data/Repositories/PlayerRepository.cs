@@ -12,7 +12,9 @@ namespace GameStats.Data.Repositories
     {
         Task<IEnumerable<Player>> GetAsync();
 
-        Task<Player> GetAsync(int id);
+        Task<Player> GetAsync(int teamId);
+
+        Task<IEnumerable<Player>> GetByTeamAsync(int id);
 
         Task<Player> AddAsync(Player player);
 
@@ -34,12 +36,20 @@ namespace GameStats.Data.Repositories
         {
             return await _context.Players
                 .Include(x => x.Team)
+                .Include(x => x.Gender)
                 .ToListAsync();
         }
 
         public async Task<Player> GetAsync(int id)
         {
             return await Task.FromResult(_context.Players.AsNoTracking().FirstOrDefault(x => x.Id == id));
+        }
+
+        public async Task<IEnumerable<Player>> GetByTeamAsync(int teamId)
+        {
+            return await _context.Players
+                .Where(x => x.TeamId == teamId)
+                .ToListAsync();
         }
 
         public async Task<Player> AddAsync(Player player)
