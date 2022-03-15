@@ -1,7 +1,7 @@
 ﻿import React, { useState, useEffect, useCallback } from 'react';
 import { message } from '../shared/Message';
 import api from '../shared/api';
-import { inputTypes, playerFormFieldNames, playerFormDisplayNames } from '../../constants';
+import { inputTypes, playerFieldNames, playerDisplayNames } from '../../constants';
 import ModalForm from '../shared/ModalForm';
 import PlayerDto from '../../DTOs/Player/PlayerDto';
 
@@ -51,14 +51,14 @@ const PlayerForm = (props) => {
     const isValidForm = (values, setErrors) => {
         if (!values.name || !values.leagueId || !values.seasonId) {
             setErrors({
-                [playerFormFieldNames.FIRST_NAME]: !values[playerFormFieldNames.FIRST_NAME] ? 'First Name is required' : '',
-                [playerFormFieldNames.LAST_NAME]: !values[playerFormFieldNames.LAST_NAME] ? 'Last Name is required' : '',
-                [playerFormFieldNames.JERSEY_NUMBER]: !values[playerFormFieldNames.JERSEY_NUMBER] ? 'Jersey Number is required' : '',
-                [playerFormFieldNames.DOB]: !values[playerFormFieldNames.DOB] ? 'Date of birth is required' : '',
-                [playerFormFieldNames.GENDER]: !values[playerFormFieldNames.GENDER] ? 'Gender is required' : '',
-                [playerFormFieldNames.SEASON]: !values[playerFormFieldNames.SEASON] ? 'Season is required' : '',
-                [playerFormFieldNames.LEAGUE]: !values[playerFormFieldNames.LEAGUE] ? 'League is required' : '',
-                [playerFormFieldNames.TEAM]: !values[playerFormFieldNames.TEAM] ? 'Team is required' : ''
+                [playerFieldNames.FIRST_NAME]: !values[playerFieldNames.FIRST_NAME] ? 'First Name is required' : '',
+                [playerFieldNames.LAST_NAME]: !values[playerFieldNames.LAST_NAME] ? 'Last Name is required' : '',
+                [playerFieldNames.JERSEY_NUMBER]: !values[playerFieldNames.JERSEY_NUMBER] ? 'Jersey Number is required' : '',
+                [playerFieldNames.DOB]: !values[playerFieldNames.DOB] ? 'Date of birth is required' : '',
+                [playerFieldNames.GENDER]: !values[playerFieldNames.GENDER] ? 'Gender is required' : '',
+                [playerFieldNames.SEASON]: !values[playerFieldNames.SEASON] ? 'Season is required' : '',
+                [playerFieldNames.LEAGUE]: !values[playerFieldNames.LEAGUE] ? 'League is required' : '',
+                [playerFieldNames.TEAM]: !values[playerFieldNames.TEAM] ? 'Team is required' : ''
             });
             return false;
         }
@@ -75,10 +75,10 @@ const PlayerForm = (props) => {
 
     const handleSelection = (selectedValue, fieldName) => {
         switch (fieldName) {
-            case playerFormFieldNames.SEASON:
+            case playerFieldNames.SEASON:
                 setSelectedSeasonId(selectedValue);
                 break;
-            case playerFormFieldNames.LEAGUE:
+            case playerFieldNames.LEAGUE:
                 setSelectedLeagueId(selectedValue);
                 break;
             default:
@@ -100,57 +100,57 @@ const PlayerForm = (props) => {
 
     const fields = [
         {
-            displayName: playerFormDisplayNames.FIRST_NAME,
-            name: playerFormFieldNames.FIRST_NAME,
+            displayName: playerDisplayNames.FIRST_NAME,
+            name: playerFieldNames.FIRST_NAME,
             inputType: inputTypes.TEXT,
             options: [],
             initialValue: defaultPlayer.id !== 0 ? defaultPlayer.firstName : ''
         },
         {
-            displayName: playerFormDisplayNames.LAST_NAME,
-            name: playerFormFieldNames.LAST_NAME,
+            displayName: playerDisplayNames.LAST_NAME,
+            name: playerFieldNames.LAST_NAME,
             inputType: inputTypes.TEXT,
             options: [],
             initialValue: defaultPlayer.id !== 0 ? defaultPlayer.lastName : ''
         },
         {
-            displayName: playerFormDisplayNames.JERSEY_NUMBER,
-            name: playerFormFieldNames.JERSEY_NUMBER,
+            displayName: playerDisplayNames.JERSEY_NUMBER,
+            name: playerFieldNames.JERSEY_NUMBER,
             inputType: inputTypes.TEXT,
             options: [],
             initialValue: defaultPlayer.id !== 0 ? defaultPlayer.jerseyNumber : ''
         },
         {
-            displayName: playerFormDisplayNames.DOB,
-            name: playerFormFieldNames.DOB,
+            displayName: playerDisplayNames.DOB,
+            name: playerFieldNames.DOB,
             inputType: inputTypes.DATE,
             options: [],
             initialValue: defaultPlayer.id !== 0 ? defaultPlayer.dateOfBirth : ''
         },
         {
-            displayName: playerFormDisplayNames.GENDER,
-            name: playerFormFieldNames.GENDER,
+            displayName: playerDisplayNames.GENDER,
+            name: playerFieldNames.GENDER,
             inputType: inputTypes.SELECT,
             options: genders.map(x => ({ value: x.id, label: x.description })),
             initialValue: defaultPlayer.id !== 0 ? defaultPlayer.gender : ''
         },
         {
-            displayName: playerFormDisplayNames.SEASON,
-            name: playerFormFieldNames.SEASON,
+            displayName: playerDisplayNames.SEASON,
+            name: playerFieldNames.SEASON,
             inputType: inputTypes.SELECT,
             options: seasons.map(x => ({ value: x.id, label: x.description })),
             initialValue: defaultPlayer.id !== 0 ? { value: defaultPlayer.seasonId, label: defaultPlayer.seasonDescription } : ''
         },
         {
-            displayName: playerFormDisplayNames.LEAGUE,
-            name: playerFormFieldNames.LEAGUE,
+            displayName: playerDisplayNames.LEAGUE,
+            name: playerFieldNames.LEAGUE,
             inputType: inputTypes.SELECT,
             options: leagues.map(x => ({ value: x.id, label: x.description })),
             initialValue: defaultPlayer.id !== 0 ? { value: defaultPlayer.leagueId, label: defaultPlayer.leagueDescription } : ''
         },
         {
-            displayName: playerFormDisplayNames.TEAM,
-            name: playerFormFieldNames.TEAM,
+            displayName: playerDisplayNames.TEAM,
+            name: playerFieldNames.TEAM,
             inputType: inputTypes.SELECT,
             options: teams.map(x => ({ value: x.id, label: x.name })),
             initialValue: defaultPlayer.id !== 0 ? { value: defaultPlayer.teamId, label: defaultPlayer.teamName } : '',

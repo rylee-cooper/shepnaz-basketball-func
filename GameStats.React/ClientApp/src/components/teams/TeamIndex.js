@@ -3,16 +3,16 @@ import { withRouter } from 'react-router-dom';
 import api from '../shared/api';
 import { message } from '../shared/Message';
 import TableData from '../shared/TableData';
-import { teamTableColumns } from '../../constants';
+import { teamFieldNames, teamDisplayNames } from '../../constants';
 import TeamIndexActions from './TeamIndexActions';
 import TeamForm from './TeamForm';
 import TeamDto from '../../DTOs/Team/TeamDto';
 
 const TeamIndex = (props) => {
     const columns = [
-        { field: teamTableColumns.TEAM_NAME, header: 'Team' },
-        { field: teamTableColumns.LEAGUE_DESCRIPTION, header: 'League' },
-        { field: teamTableColumns.SEASON_DESCRIPTION, header: 'Season' }
+        { field: teamFieldNames.TEAM_NAME, header: teamDisplayNames.TEAM },
+        { field: teamFieldNames.LEAGUE_DESCRIPTION, header: teamDisplayNames.LEAGUE },
+        { field: teamFieldNames.SEASON_DESCRIPTION, header: teamDisplayNames.SEASON }
     ];
     const { history } = props;
     const [teams, setTeams] = useState(false);

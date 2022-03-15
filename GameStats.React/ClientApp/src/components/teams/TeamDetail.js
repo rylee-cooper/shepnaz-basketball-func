@@ -4,6 +4,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import api from '../shared/api';
 import { message } from '../shared/Message';
+import { playerFieldNames, playerDisplayNames } from '../../constants';
 import TeamForm from './TeamForm';
 
 const TeamDetail = (props) => {
@@ -40,9 +41,9 @@ const TeamDetail = (props) => {
     }
 
     const columns = [
-        { field: 'name', header: 'Name' },
-        { field: 'jerseyNumber', header: 'Jersey Number' },
-        { field: 'gender', header: 'Gender' }
+        { field: playerFieldNames.PLAYER_NAME, header: playerDisplayNames.PLAYER_NAME },
+        { field: playerFieldNames.JERSEY_NUMBER, header: playerDisplayNames.JERSEY_NUMBER },
+        { field: playerFieldNames.GENDER, header: playerDisplayNames.GENDER }
     ];
 
     useEffect(() => {

@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import api from '../shared/api';
 import { message } from '../shared/Message';
 import TableData from '../shared/TableData';
-import { playerTableColumns } from '../../constants';
+import { playerFieldNames, playerDisplayNames } from '../../constants';
 import PlayerIndexActions from './PlayerIndexActions';
 import PlayerForm from './PlayerForm';
 import PlayerDto from '../../DTOs/Player/PlayerDto';
@@ -13,9 +13,9 @@ const PlayerIndex = (props) => {
     const [players, setPlayers] = useState([]);
     
     const columns = [
-        { field: playerTableColumns.PLAYER_NAME, header: 'Name' },
-        { field: playerTableColumns.JERSEY_NUMBER, header: 'Jersey Number' },
-        { field: playerTableColumns.TEAM, header: 'Team' }
+        { field: playerFieldNames.PLAYER_NAME, header: playerDisplayNames.PLAYER_NAME },
+        { field: playerFieldNames.JERSEY_NUMBER, header: playerDisplayNames.JERSEY_NUMBER },
+        { field: playerFieldNames.TEAM_NAME, header: playerDisplayNames.TEAM }
     ];
 
     const getPlayers = () => {

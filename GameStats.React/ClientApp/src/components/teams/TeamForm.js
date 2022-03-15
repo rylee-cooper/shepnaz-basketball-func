@@ -1,7 +1,7 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { message } from '../shared/Message';
 import api from '../shared/api';
-import { inputTypes, teamFormFieldNames, teamFormDisplayNames } from '../../constants';
+import { inputTypes, teamFieldNames, teamDisplayNames } from '../../constants';
 import ModalForm from '../shared/ModalForm';
 import TeamDto from '../../DTOs/Team/TeamDto';
 
@@ -30,9 +30,9 @@ const TeamForm = (props) => {
     const isValidForm = (values, setErrors) => {
         if (!values.name || !values.leagueId || !values.seasonId) {
             setErrors({
-                [teamFormFieldNames.TEAM]: !values[teamFormFieldNames.TEAM] ? 'Team Name is required' : '',
-                [teamFormFieldNames.LEAGUE]: !values[teamFormFieldNames.LEAGUE] ? 'League is required' : '',
-                [teamFormFieldNames.SEASON]: !values[teamFormFieldNames.SEASON] ? 'Season is required' : ''
+                [teamFieldNames.TEAM]: !values[teamFieldNames.TEAM] ? 'Team Name is required' : '',
+                [teamFieldNames.LEAGUE]: !values[teamFieldNames.LEAGUE] ? 'League is required' : '',
+                [teamFieldNames.SEASON]: !values[teamFieldNames.SEASON] ? 'Season is required' : ''
             });
             return false;
         }
@@ -54,22 +54,22 @@ const TeamForm = (props) => {
 
     const fields = [
         {
-            displayName: teamFormDisplayNames.TEAM,
-            name: teamFormFieldNames.TEAM,
+            displayName: teamDisplayNames.TEAM,
+            name: teamFieldNames.TEAM,
             inputType: inputTypes.TEXT,
             options: [],
             initialValue: defaultTeam.id !== 0 ? defaultTeam.name : ''
         },
         {
-            displayName: teamFormDisplayNames.SEASON,
-            name: teamFormFieldNames.SEASON,
+            displayName: teamDisplayNames.SEASON,
+            name: teamFieldNames.SEASON,
             inputType: inputTypes.SELECT,
             options: seasons.map(x => ({ value: x.id, label: x.description })),
             initialValue: defaultTeam.id !== 0 ? { value: defaultTeam.seasonId, label: defaultTeam.seasonDescription } : ''
         },
         {
-            displayName: teamFormDisplayNames.LEAGUE,
-            name: teamFormFieldNames.LEAGUE,
+            displayName: teamDisplayNames.LEAGUE,
+            name: teamFieldNames.LEAGUE,
             inputType: inputTypes.SELECT,
             options: leagues.map(x => ({ value: x.id, label: x.description })),
             initialValue: defaultTeam.id !== 0 ? { value: defaultTeam.leagueId, label: defaultTeam.leagueDescription } : ''
