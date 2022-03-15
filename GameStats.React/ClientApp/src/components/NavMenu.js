@@ -3,30 +3,31 @@ import { Container, Navbar, Nav } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import logo from '../images/shepnaz-logo.png';
 
-const links = [
-    {
-        text: 'Teams',
-        url: '/Team'
-    },
-    {
-        text: 'Players',
-        url: '/Player'
-    },
-    {
-        text: 'Coaches',
-        url: '/Coach'
-    },
-    {
-        text: 'Leagues',
-        url: '/League'
-    },
-    {
-        text: 'Seasons',
-        url: '/Season'
-    }
-];
-
 const NavMenu = () => {
+
+    const links = [
+        {
+            text: 'Teams',
+            url: '/Team'
+        },
+        {
+            text: 'Players',
+            url: '/Player'
+        },
+        {
+            text: 'Coaches',
+            url: '/Coach'
+        },
+        {
+            text: 'Leagues',
+            url: '/League'
+        },
+        {
+            text: 'Seasons',
+            url: '/Season'
+        }
+    ];
+
     return (
         <header>
             <Navbar bg="dark" variant="dark" className="mb-lg-5 mb-sm-3">

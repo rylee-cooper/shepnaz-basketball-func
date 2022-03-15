@@ -1,10 +1,10 @@
 ﻿import React, { useState, useEffect, useCallback } from 'react';
-import { Card, Container, Row, Col, Button } from 'react-bootstrap';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import api from '../shared/api';
+import DetailCard from '../shared/DetailCard';
 import { message } from '../shared/Message';
-import { playerFieldNames, playerDisplayNames } from '../../constants';
+import { playerFieldNames, playerDisplayNames, teamDisplayNames } from '../../constants';
 import TeamForm from './TeamForm';
 
 const TeamDetail = (props) => {
@@ -64,6 +64,12 @@ const TeamDetail = (props) => {
         { field: playerFieldNames.GENDER, header: playerDisplayNames.GENDER }
     ];
 
+    const textDetails = [
+        `${teamDisplayNames.LEAGUE}: ${team.leagueDescription}`,
+        `${teamDisplayNames.SEASON}: ${team.seasonDescription}`,
+        `${teamDisplayNames.COACHES}: ${getCoachDisplay(coaches)}`
+    ];
+
     useEffect(() => {
         getTeam();
         getPlayers();
@@ -72,26 +78,12 @@ const TeamDetail = (props) => {
 
     return (
         <React.Fragment>
-            <Card className="basic-card">
-                <Card.Body className="p-4 d-flex justify-content-between">
-                    <Container>
-                        <Row>
-                            <Col>
-                                <Card.Title as="h2">{team.name}</Card.Title>
-                                <Card.Text>League: {team.leagueDescription}</Card.Text>
-                                <Card.Text>{team.seasonDescription}</Card.Text>
-                                <Card.Text>Coach: {getCoachDisplay(coaches)}</Card.Text>
-                            </Col>
-                            <Col className="d-flex flex-row-reverse">
-                                <div>
-                                    <Button variant="secondary" size="lg" className="create-btn" onClick={toggleModalDisplay}>Edit Team</Button>
-                                </div>
-                            </Col>
-                        </Row>
-
-                    </Container>
-                </Card.Body>
-            </Card>
+            <DetailCard
+                title={team.name}
+                textDetails={textDetails}
+                toggleModalDisplay={toggleModalDisplay}
+                editButtonText="Edit Team"
+            />
             <div className="mt-5">
                 <h4 className="pl-3">Players</h4>
                 <DataTable

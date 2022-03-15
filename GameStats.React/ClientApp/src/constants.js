@@ -10,7 +10,9 @@
 export const teamDisplayNames = {
     TEAM: 'Team',
     LEAGUE: 'League',
-    SEASON: 'Season'
+    SEASON: 'Season',
+    PLAYERS: 'Players',
+    COACHES: 'Coaches'
 };
 
 export const playerFieldNames = {
