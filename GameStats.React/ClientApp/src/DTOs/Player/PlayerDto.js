@@ -8,6 +8,7 @@
         this.teamName = options.teamName || '';
         this.dateOfBirth = options.dateOfBirth || '';
         this.gender = options.gender || '';
+        this.genderId = options.genderId || 0;
 
         this.seasonId = options.seasonId || 0;
         this.seasonDescription = options.seasonDescription || '';

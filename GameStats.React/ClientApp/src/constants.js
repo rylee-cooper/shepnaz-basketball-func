@@ -30,7 +30,7 @@ export const playerFormFieldNames = {
     SEASON: 'seasonId',
     LEAGUE: 'leagueId',
     DOB: 'dateOfBirth',
-    GENDER: 'gender'
+    GENDER: 'genderId'
 };
 
 export const playerFormDisplayNames = {
