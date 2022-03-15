@@ -9,14 +9,32 @@ import TeamForm from './TeamForm';
 
 const TeamDetail = (props) => {
     const [team, setTeam] = useState({});
+    const [players, setPlayers] = useState([]);
+    const [coaches, setCoaches] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const { id } = props.match.params;
-    
+
     const getTeam = useCallback(() => {
         api.getTeam(id).then((result) => {
             setTeam(result);
         }).catch(err => {
             message.error(`Error getting team: ${err.message}`);
+        });
+    }, [id]);
+
+    const getPlayers = useCallback(() => {
+        api.getPlayersByTeam(id).then((result) => {
+            setPlayers(result.players);
+        }).catch(err => {
+            message.error(`Error getting players: ${err.message}`);
+        });
+    }, [id]);
+
+    const getCoaches = useCallback(() => {
+        api.getCoachesByTeam(id).then((result) => {
+            setCoaches(result.coaches);
+        }).catch(err => {
+            message.error(`Error getting coaches: ${err.message}`);
         });
     }, [id]);
 
@@ -48,7 +66,9 @@ const TeamDetail = (props) => {
 
     useEffect(() => {
         getTeam();
-    }, [getTeam]);
+        getPlayers();
+        //getCoaches();
+    }, []);
 
     return (
         <React.Fragment>
@@ -75,7 +95,7 @@ const TeamDetail = (props) => {
             <div className="mt-5">
                 <h4 className="pl-3">Players</h4>
                 <DataTable
-                    value={team.players}
+                    value={players}
                     responsiveLayout="scroll"
                     stripedRows
                 >

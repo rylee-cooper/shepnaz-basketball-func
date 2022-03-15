@@ -49,6 +49,7 @@ namespace GameStats.Data.Repositories
         {
             return await _context.Players
                 .Where(x => x.TeamId == teamId)
+                .Include(x => x.Gender)
                 .ToListAsync();
         }
 

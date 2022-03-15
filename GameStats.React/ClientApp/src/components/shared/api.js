@@ -104,6 +104,12 @@ export default {
         return new PlayerDto(response);
     },
 
+    async getPlayersByTeam(id) {
+        const url = `Player/Team/${id}`;
+        let response = await apiCall(url);
+        return new PlayerListDto(response);
+    },
+
     async addPlayer(dto) {
         const url = 'Player/Add';
         let response = await apiCall(url, { method: 'POST', body: dto.stringify() });
