@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GameStats.Data.Framework;
@@ -12,9 +11,9 @@ namespace GameStats.Data.Repositories
     {
         Task<IEnumerable<Player>> GetAsync();
 
-        Task<Player> GetAsync(int teamId);
+        Task<Player> GetAsync(int id);
 
-        Task<IEnumerable<Player>> GetByTeamAsync(int id);
+        Task<IEnumerable<Player>> GetByTeamAsync(int teamId);
 
         Task<Player> AddAsync(Player player);
 
@@ -42,7 +41,11 @@ namespace GameStats.Data.Repositories
 
         public async Task<Player> GetAsync(int id)
         {
-            return await Task.FromResult(_context.Players.AsNoTracking().FirstOrDefault(x => x.Id == id));
+            return await _context.Players
+                .AsNoTracking()
+                .Include(x => x.Team)
+                .Include(x => x.Gender)
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<IEnumerable<Player>> GetByTeamAsync(int teamId)

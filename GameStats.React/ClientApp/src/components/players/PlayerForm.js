@@ -132,7 +132,7 @@ const PlayerForm = (props) => {
             name: playerFieldNames.GENDER_ID,
             inputType: inputTypes.SELECT,
             options: genders.map(x => ({ value: x.id, label: x.description })),
-            initialValue: defaultPlayer.id !== 0 ? defaultPlayer.gender : ''
+            initialValue: defaultPlayer.id !== 0 ? { value: defaultPlayer.genderId, label: defaultPlayer.gender } : ''
         },
         {
             displayName: playerDisplayNames.SEASON,

@@ -10,7 +10,7 @@ const DetailCard = (props) => {
                     <Row>
                         <Col>
                             <Card.Title as="h2">{title}</Card.Title>
-                            {textDetails.map(text => <Card.Text>{text}</Card.Text>)}
+                            {textDetails.map((text, i) => <Card.Text key={i}>{text}</Card.Text>)}
                         </Col>
                         <Col className="d-flex flex-row-reverse">
                             <div>

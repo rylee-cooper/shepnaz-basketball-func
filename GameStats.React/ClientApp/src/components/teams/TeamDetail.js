@@ -74,7 +74,7 @@ const TeamDetail = (props) => {
         getTeam();
         getPlayers();
         getCoaches();
-    }, []);
+    }, [getTeam, getPlayers, getCoaches]);
 
     return (
         <React.Fragment>

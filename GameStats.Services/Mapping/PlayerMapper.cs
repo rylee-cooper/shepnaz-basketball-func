@@ -13,7 +13,7 @@ namespace GameStats.Services.Mapping
                 LastName = domain.LastName,
                 JerseyNumber = domain.JerseyNumber,
                 TeamId = domain.TeamId,
-                TeamName = domain.Team?.Name ?? string.Empty,
+                TeamName = domain.Team?.Name,
                 DateOfBirth = domain.DateOfBirth,
                 Gender = domain.Gender?.Description,
                 GenderId = domain.GenderId
